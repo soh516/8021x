@@ -1,0 +1,19 @@
+um -y install nfs-utils samba sssd-ad sssd-krb5 sssd-ldap cyrus-sasl-gssapi
+yum -y install sssd-client.i686
+yum -y install adcli
+mv /etc/samba/smb.conf /etc/samba/smb.confold
+vi /etc/samba/smb.conf
+[global]
+workgroup = USASK
+realm = USASK.CA
+security = ads
+kerberos method = secrets and keytab
+client signing = yes
+client use spnego = yes
+#adcli join --domain=usask.ca --login-user=soh516 --computer-name=oneplustest --show-password --login-type=user --domain-ou=OU=ResearchComputingOU,DC=usask,DC=ca usask.ca --show-details --host-fqdn=oneplustest.usask.ca --verbose
+adcli join --domain=usask.ca --login-user=soh516 --computer-name=oneplustest --show-password --login-type=user --domain-ou=OU=ResearchComputingOU,DC=usask,DC=ca usask.ca --host-fqdn=oneplustest.usask.ca
+#computer-password = mrxgVH_yeZdU_Mp0W<:Fss]c-eJeWt4NroE)N8Cs6MW;AC_:l)C4VJ83aHLR\sAVG+/R\VRNc3Kne(?WMS3rUD[8EE5QS^M<eFgK(dvgzv9&,f^I*IrF4#no
+echo "SECURE_NFS="yes"" >> /etc/sysconfig/nfs
+chkconfig rpcgssd on
+service rpcgssd start
+
