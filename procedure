@@ -1,4 +1,4 @@
-um -y install nfs-utils samba sssd-ad sssd-krb5 sssd-ldap cyrus-sasl-gssapi
+yum -y install nfs-utils samba sssd-ad sssd-krb5 sssd-ldap cyrus-sasl-gssapi
 yum -y install sssd-client.i686
 yum -y install adcli
 mv /etc/samba/smb.conf /etc/samba/smb.confold
